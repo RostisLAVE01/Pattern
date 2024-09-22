@@ -8,6 +8,24 @@ class Student(
     private var email: String? = null,
     private var git: String? = null
 ) {
+
+    // Первичный конструктор, который принимает обязательные поля
+    init {
+        require(surname.isNotBlank()) { "Фамилия не может быть пустой" }
+        require(name.isNotBlank()) { "Имя не может быть пустым" }
+    }
+
+    // Вторичный конструктор, который принимает необязательные поля
+    constructor(
+        id: Int,
+        surname: String,
+        name: String,
+        phone: String? = null,
+        telegram: String? = null,
+        email: String? = null,
+        git: String? = null
+    ) : this(id, surname, name, null, phone, telegram, email, git)
+
     fun getId(): Int
     {
         return id
