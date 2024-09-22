@@ -31,8 +31,22 @@ fun main() {
         telegram = "@yakhont"
     )
 
+
+    val example_hashMap = hashMapOf<String, Any?>(
+        "id" to 5,
+        "lastname" to "Фуркин",
+        "name" to "Иван",
+        "fathername" to "Степанович",
+        "phone" to "+7-987-336-56-89",
+        "telegram" to "@samsam",
+        "mail" to "ivan@mail.ru"
+    )
+
     println(example_1)
     println(example_2)
     println(example_3)
     println(example_4)
+
+    val hash = Student(example_hashMap)
+    println(hash)
 }

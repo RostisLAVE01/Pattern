@@ -26,6 +26,20 @@ class Student(
         git: String? = null
     ) : this(id, surname, name, null, phone, telegram, email, git)
 
+    // Вторичный конструктор, который принимает HashMap
+    constructor(hashStud: HashMap<String, Any?>) : this(
+        (hashStud["id"] as? Int) ?: throw IllegalArgumentException("ID обязателен"),
+        (hashStud["lastname"] as? String) ?: throw IllegalArgumentException("Фамилия обязательна"),
+        (hashStud["name"] as? String) ?: throw IllegalArgumentException("Имя обязательно"),
+        hashStud["fathername"] as? String,
+        hashStud["phone"]?.toString(),
+        hashStud["telegram"]?.toString(),
+        hashStud["mail"]?.toString(),
+        hashStud["git"]?.toString()
+    )
+
+
+
     fun getId(): Int
     {
         return id
