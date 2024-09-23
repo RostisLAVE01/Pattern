@@ -43,10 +43,47 @@ class Student(
             return phone?.matches(Regex("^\\+\\d{1,3}(-\\d{3}){2}-\\d{2}-\\d{2}\$")) ?: false
         }
 
+        // Метод проверки имени пользователя Telegram
+        fun ValidTelegram(telegram: String?): Boolean {
+            return telegram?.matches(Regex("^[a-zA-Z0-9_]{5,32}\$")) ?: false
+        }
+
+        // Метод проверки формата электронной почты
+        fun ValidMail(mail: String?): Boolean {
+            return mail?.matches(Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$")) ?: false
+        }
+
+        // Метод проверки формата Git URL
+        fun ValidGit(git: String?): Boolean {
+            return git?.matches(Regex("^[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+$")) ?: false
+        }
+
+
         // Метод проверки номера телефона с выбрасыванием исключения
         internal fun checkPhone(phone: String?) {
             if (!ValidPhone(phone)) {
                 throw IllegalArgumentException("Неправильный формат телефонного номера")
+            }
+        }
+
+        // Метод проверки Telegram с выбрасыванием исключения
+        internal fun checkTelegram(telegram: String?) {
+            if (!ValidTelegram(telegram)) {
+                throw IllegalArgumentException("Неправильный формат Telegram ")
+            }
+        }
+
+        // Метод проверки электронной почты с выбрасыванием исключения
+        internal fun checkMail(mail: String?) {
+            if (!ValidMail(mail)) {
+                throw IllegalArgumentException("Неправильный формат электронной почты")
+            }
+        }
+
+        // Метод проверки Git с выбрасыванием исключения
+        internal fun checkGit(git: String?) {
+            if (!ValidGit(git)) {
+                throw IllegalArgumentException("Неправильный формат Git")
             }
         }
     }
