@@ -65,7 +65,7 @@ fun main() {
 
     // Проверяем валидность данных после установки контактов
     val isValid = valid.validate()
-    println("Данные студента валидны: $isValid") // Вывод:  true
+    println("Данные студента валидны: $isValid") // Вывод: true
 
 
     println(example_1)
