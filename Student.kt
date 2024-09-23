@@ -88,6 +88,27 @@ class Student(
         }
     }
 
+    // Метод для проверки наличия Git
+    private fun validateGit(): Boolean {
+        return !git.isNullOrEmpty()
+    }
+
+    // Метод для проверки наличия любого контакта
+    private fun validateContact(): Boolean {
+        return !phone.isNullOrEmpty() || !telegram.isNullOrEmpty() || !email.isNullOrEmpty()
+    }
+
+    // Основной метод валидации
+    fun validate(): Boolean {
+        return validateGit() && validateContact()
+    }
+
+    // Метод для установки значений контактов
+    fun setContacts(phone: String? = null, telegram: String? = null, mail: String? = null) {
+        this.phone = phone
+        this.telegram = telegram
+        this.email = mail
+    }
 
 
     fun getId(): Int

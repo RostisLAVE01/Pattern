@@ -54,6 +54,19 @@ fun main() {
     )
     val validPhone = Student(example_validPhone)
 
+    val valid = Student(
+        id = 4,
+        surname = "Смурыгин",
+        name = "Яхонт",
+        git = "https://github.com/Smyrk"
+    )
+
+    valid.setContacts(phone = "1234567890", telegram = "@johndoe")
+
+    // Проверяем валидность данных после установки контактов
+    val isValid = valid.validate()
+    println("Данные студента валидны: $isValid") // Вывод:  true
+
 
     println(example_1)
     println(example_2)
