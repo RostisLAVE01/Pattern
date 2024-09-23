@@ -32,11 +32,24 @@ class Student(
         (hashStud["lastname"] as? String) ?: throw IllegalArgumentException("Фамилия обязательна"),
         (hashStud["name"] as? String) ?: throw IllegalArgumentException("Имя обязательно"),
         hashStud["fathername"] as? String,
-        hashStud["phone"]?.toString(),
+        (hashStud["phone"] as? String)?.also { checkPhone(it) }, // Проверка телефона
         hashStud["telegram"]?.toString(),
         hashStud["mail"]?.toString(),
         hashStud["git"]?.toString()
     )
+
+    companion object {
+        fun ValidPhone(phone: String?): Boolean {
+            return phone?.matches(Regex("^\\+\\d{1,3}(-\\d{3}){2}-\\d{2}-\\d{2}\$")) ?: false
+        }
+
+        // Метод проверки номера телефона с выбрасыванием исключения
+        internal fun checkPhone(phone: String?) {
+            if (!ValidPhone(phone)) {
+                throw IllegalArgumentException("Неправильный формат телефонного номера")
+            }
+        }
+    }
 
 
 

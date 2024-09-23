@@ -42,6 +42,19 @@ fun main() {
         "mail" to "ivan@mail.ru"
     )
 
+    val example_validPhone = hashMapOf<String, Any?>(
+        "id" to 6,
+        "lastname" to "Кирсанов",
+        "name" to "Сергей",
+        "fathername" to "Генадьевич",
+        "phone" to "+7-916-123-45-67", // Корректный номер
+        "telegram" to "ivan_ivanov",
+        "mail" to "ivan@example.com",
+        "git" to "ivan_git"
+    )
+    val validPhone = Student(example_validPhone)
+
+
     println(example_1)
     println(example_2)
     println(example_3)
@@ -49,4 +62,5 @@ fun main() {
 
     val hash = Student(example_hashMap)
     println(hash)
+    println(validPhone)
 }
