@@ -1,0 +1,18 @@
+class Student{
++Id
++Surname
++name
++patronymic
++phone
++telegram
++email
++git
+
+-validateGit(): Boolean
+-validateContact(): Boolean
++validate(): Boolean
++setContacts(String?,String?,String?):
++toString(): String
+Student(String,String,String,String?,String?,String?,String?)
+Student(String,String,String)
+}
