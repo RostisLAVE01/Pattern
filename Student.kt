@@ -1,21 +1,87 @@
 class Student(
-    private val id: Int,
-    private var surname: String,
-    private var name: String,
-    private var patronymic: String? = null, //То что разрешено оставить незаполненым
-    private var phone: String? = null,
-    private var telegram: String? = null,
-    private var email: String? = null,
-    private var git: String? = null
+    id: Int,
+    surname: String,
+    name: String,
+    patronymic: String? = null,
+    phone: String? = null,
+    telegram: String? = null,
+    email: String? = null,
+    git: String? = null
 ) {
+    var id: Int = id
+        get() {
+            return field
+        }
+        set(value) {
+            require(value > 0)
+            {
+                "ID должен быть больше 0"
+            }
+            field = value
+        }
+    var surname: String = surname
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+    var name: String = name
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+    var patronymic: String? = patronymic
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+    var phone: String? = phone
+        get() {
+            return field
+        }
+        set(value) {
+            checkPhone(value)
+            field = value
+        }
+    var telegram: String? = telegram
+        get() {
+            return field
+        }
+        set(value) {
+            checkTelegram(value)
+            field = value
+        }
+    var email: String? = email
+        get() {
+            return field
+        }
+        set(value) {
+            checkMail(value)
+            field = value
+        }
+    var git: String? = git
+        get() {
+            return field
+        }
+        set(value) {
+            checkGit(value)
+            field = value
+        }
 
     // Первичный конструктор, который принимает обязательные поля
     init {
+        counter ++
         require(surname.isNotBlank()) { "Фамилия не может быть пустой" }
         require(name.isNotBlank()) { "Имя не может быть пустым" }
+        //checkPhone(phone)
     }
 
-    // Вторичный конструктор, который принимает необязательные поля
+    // Вторичные конструкторы для создания объектов с различными комбинациями
     constructor(
         id: Int,
         surname: String,
@@ -26,19 +92,33 @@ class Student(
         git: String? = null
     ) : this(id, surname, name, null, phone, telegram, email, git)
 
+//    constructor(_id:Int,_lastname:String,_name:String,_fathername:String,_phone:String?=null,_telegram:String?=null,_mail:String?=null,_git:String?=null)
+//    {
+//        id=_id
+//        surname=_lastname
+//        name=_name
+//        patronymic=_fathername
+//        phone=_phone
+//        telegram=_telegram
+//        email=_mail
+//        git=_git
+//    }
+
+
     // Вторичный конструктор, который принимает HashMap
     constructor(hashStud: HashMap<String, Any?>) : this(
         (hashStud["id"] as? Int) ?: throw IllegalArgumentException("ID обязателен"),
-        (hashStud["lastname"] as? String) ?: throw IllegalArgumentException("Фамилия обязательна"),
+        (hashStud["surname"] as? String) ?: throw IllegalArgumentException("Фамилия обязательна"),
         (hashStud["name"] as? String) ?: throw IllegalArgumentException("Имя обязательно"),
-        hashStud["fathername"] as? String,
-        (hashStud["phone"] as? String)?.also { checkPhone(it) }, // Проверка телефона
+        (hashStud["patronymic"] as? String) ?: "",
+        (hashStud["phone"] as? String)?.also { checkPhone(it) },
         hashStud["telegram"]?.toString(),
-        hashStud["mail"]?.toString(),
+        hashStud["email"]?.toString(),
         hashStud["git"]?.toString()
     )
 
     companion object {
+        var counter = 0
         fun ValidPhone(phone: String?): Boolean {
             return phone?.matches(Regex("^\\+\\d{1,3}(-\\d{3}){2}-\\d{2}-\\d{2}\$")) ?: false
         }
@@ -110,85 +190,9 @@ class Student(
         this.email = mail
     }
 
-
-    fun getId(): Int
-    {
-        return id
-    }
-
-    fun getSurname(): String
-    {
-        return surname
-    }
-
-    fun setSurname(value: String)
-    {
-        surname = value
-    }
-
-    fun getName(): String
-    {
-        return name
-    }
-
-    fun setName(value: String)
-    {
-        name = value
-    }
-
-    fun getPatronymic(): String?
-    {
-        return patronymic
-    }
-
-    fun setPatronymic(value: String?)
-    {
-        patronymic = value
-    }
-
-    fun getPhone(): String?
-    {
-        return phone
-    }
-
-    fun setPhone(value: String?)
-    {
-        phone = value
-    }
-
-    fun getTelegram(): String?
-    {
-        return telegram
-    }
-
-    fun setTelegram(value: String?)
-    {
-        telegram = value
-    }
-
-    fun getEmail(): String?
-    {
-        return email
-    }
-
-    fun setEmail(value: String?)
-    {
-        email = value
-    }
-
-    fun getGit(): String?
-    {
-        return git
-    }
-
-    fun setGit(value: String?)
-    {
-        git = value
-    }
-
     override fun toString(): String {
-        return "Студент(ID: $id, Фамилия: '$surname', Имя: '$name', Отчество: '${patronymic ?: "Нет"}', " +
-                "Телефон: '${phone ?: "Нет"}', Телеграм: '${telegram ?: "Нет"}', " +
-                "Почта: '${email ?: "Нет"}', Гит: '${git ?: "Нет"}')"
+        return "Student(ID: $id, Surname: '$surname', Name: '$name', fathername: '${patronymic ?: "NO"}', " +
+                "Phone: '${phone ?: "No"}', Telegram: '${telegram ?: "No"}', " +
+                "Email: '${email ?: "No"}', GIT: '${git ?: "NO"}')"
     }
 }

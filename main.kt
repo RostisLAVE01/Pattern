@@ -1,13 +1,13 @@
 fun main() {
     val example_1 = Student(
-        id = 1,
-        surname = "Фолгимштейн",
-        name = "Федор",
-        patronymic = "Крузинштейн",
-        phone = "+7-989-345-34-67",
-        telegram = "@ROOMdoom",
-        email = "RoomDoom@mail.ru",
-        git = "https://github.com/Fedor"
+         1,
+        "Фолгимштейн",
+        "Федор",
+        "Крузинштейн",
+        "+7-989-345-34-67",
+        "@ROOMdoom",
+        "RoomDoom@mail.ru",
+        "https://github.com/Fedor"
     )
 
     val example_2 = Student(
@@ -34,9 +34,9 @@ fun main() {
 
     val example_hashMap = hashMapOf<String, Any?>(
         "id" to 5,
-        "lastname" to "Фуркин",
+        "surname" to "Фуркин",
         "name" to "Иван",
-        "fathername" to "Степанович",
+        "patronymic" to "Степанович",
         "phone" to "+7-987-336-56-89",
         "telegram" to "@samsam",
         "mail" to "ivan@mail.ru"
@@ -44,9 +44,9 @@ fun main() {
 
     val example_validPhone = hashMapOf<String, Any?>(
         "id" to 6,
-        "lastname" to "Кирсанов",
+        "surname" to "Кирсанов",
         "name" to "Сергей",
-        "fathername" to "Генадьевич",
+        "patronymic" to "Генадьевич",
         "phone" to "+7-916-123-45-67", // Корректный номер
         "telegram" to "ivan_ivanov",
         "mail" to "ivan@example.com",
@@ -61,11 +61,11 @@ fun main() {
         git = "https://github.com/Smyrk"
     )
 
-    valid.setContacts(phone = "1234567890", telegram = "@johndoe")
+    valid.setContacts(phone = "+7-916-123-45-67", telegram = "johndoe", mail = "sdfasf@mail.ru")
 
     // Проверяем валидность данных после установки контактов
     val isValid = valid.validate()
-    println("Данные студента валидны: $isValid") // Вывод: true
+    println("Данные студента валидны: $isValid")
 
 
     println(example_1)
