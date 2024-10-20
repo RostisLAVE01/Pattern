@@ -73,6 +73,49 @@ class Student(
             field = value
         }
 
+    fun getInfo(): String
+    {
+        var field = "Ф.И.О. " + getSHName()
+
+        field += " " + getContact()
+        field += " " + getSHGIT()
+
+        return field
+
+    }
+
+    fun getSHName(): String
+    {
+        var field = surname + " " + name + " " + patronymic
+        return field
+    }
+
+    fun getSHGIT(): String
+    {
+        if(!git.isNullOrEmpty())
+        {
+            return "GIT: " + git
+        }
+        return "Ошибка GIT"
+    }
+
+    fun getContact(): String
+    {
+        if(!phone.isNullOrEmpty())
+        {
+            return "Телефон: " + phone
+        }
+        if(!telegram.isNullOrEmpty())
+        {
+            return "Телеграм: " + telegram
+        }
+        if(!email.isNullOrEmpty())
+        {
+            return "Email: " + email
+        }
+        return "Ошибка нет контактов "
+    }
+
     // Первичный конструктор, который принимает обязательные поля
     init {
         counter ++

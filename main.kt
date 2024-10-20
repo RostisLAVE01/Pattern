@@ -79,12 +79,12 @@ fun main() {
 
     //lab2
 
-    // Пример строки для парсинга
+    //строка для парсинга
     val studentData = "1 Мирногов Кирилл Иванович +7-916-123-45-67 mirno_ivanov kirill@example.com kirill-git"
 
-    // Создание объекта Student с использованием нового конструктора
-    val studentFromString = Student(studentData)
+    val stud = Student(studentData)
 
-    // Вывод результата
-    println(studentFromString)
+    println(stud)
+    //№3 метод getInfo
+    println(stud.getInfo())
 }
