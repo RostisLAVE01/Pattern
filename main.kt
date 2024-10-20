@@ -76,4 +76,15 @@ fun main() {
     val hash = Student(example_hashMap)
     println(hash)
     println(validPhone)
+
+    //lab2
+
+    // Пример строки для парсинга
+    val studentData = "1 Мирногов Кирилл Иванович +7-916-123-45-67 mirno_ivanov kirill@example.com kirill-git"
+
+    // Создание объекта Student с использованием нового конструктора
+    val studentFromString = Student(studentData)
+
+    // Вывод результата
+    println(studentFromString)
 }

@@ -195,4 +195,15 @@ class Student(
                 "Phone: '${phone ?: "No"}', Telegram: '${telegram ?: "No"}', " +
                 "Email: '${email ?: "No"}', GIT: '${git ?: "NO"}')"
     }
+
+    constructor(input: String) : this(
+        id = input.split(" ")[0].toInt(),
+        surname = input.split(" ")[1],
+        name = input.split(" ")[2],
+        patronymic = input.split(" ").getOrNull(3),
+        phone = input.split(" ").getOrNull(4),
+        telegram = input.split(" ").getOrNull(5),
+        email = input.split(" ").getOrNull(6),
+        git = input.split(" ").getOrNull(7)
+    )
 }
