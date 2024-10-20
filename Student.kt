@@ -196,6 +196,7 @@ class Student(
                 "Email: '${email ?: "No"}', GIT: '${git ?: "NO"}')"
     }
 
+
     constructor(input: String) : this(
         id = input.split(" ")[0].toInt(),
         surname = input.split(" ")[1],
