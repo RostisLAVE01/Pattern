@@ -89,6 +89,13 @@ fun main() {
     println(stud.getInfo())
 
     //№4 класс Student_short
-    var st =Student_Short(stud)
+    var st = Student_Short(stud)
     println(st)
+
+    //№7 чтение из файла
+    val students = Student.read_from_txt("fail.txt")
+    for(stud in students)
+    {
+        println(stud)
+    }
 }

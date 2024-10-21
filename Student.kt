@@ -1,3 +1,6 @@
+import java.io.File
+import java.io.FileNotFoundException
+
 class Student(
     id: Int,
     surname: String,
@@ -190,6 +193,39 @@ class Student(
             if (!ValidGit(git)) {
                 throw IllegalArgumentException("Неправильный формат Git")
             }
+        }
+
+        // Метод проверки файла
+        fun read_from_txt(filePath: String): List<Student> {
+
+            var stud = mutableListOf<Student>()
+
+            try {
+                val file = File(filePath)
+
+                // Проверяем, существует ли файл
+                if (!file.exists()) {
+                    println("Файл с указанным адресом не найден: $filePath")
+                    return stud // Возвращаем пустой список
+                }
+
+                // Считываем данные из файла и создаем объекты Student
+                var line = file.readLines()
+
+                try {
+                    for(lines in line)
+                    {
+                        val student = Student(lines)
+                        stud.add(student)
+                    }
+                } catch (e: Exception) {
+                    println("Ошибка при создании студента из строки: \"$line\". Причина: ${e.message}")
+                }
+            } catch (e: Exception) {
+                println("Ошибка при чтении файла: ${e.message}")
+            }
+
+            return stud // Возвращаем список студентов
         }
     }
 
