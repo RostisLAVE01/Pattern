@@ -80,11 +80,15 @@ fun main() {
     //lab2
 
     //строка для парсинга
-    val studentData = "1 Мирногов Кирилл Иванович +7-916-123-45-67 mirno_ivanov kirill@example.com kirill-git"
+    val studentData = "7 Мирногов Кирилл Иванович +7-916-123-45-67 mirno_ivanov kirill@example.com kirill-git"
 
     val stud = Student(studentData)
 
     println(stud)
     //№3 метод getInfo
     println(stud.getInfo())
+
+    //№4 класс Student_short
+    var st =Student_Short(stud)
+    println(st)
 }
