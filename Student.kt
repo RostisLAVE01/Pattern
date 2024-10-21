@@ -7,18 +7,8 @@ class Student(
     telegram: String? = null,
     email: String? = null,
     git: String? = null
-) {
-    var id: Int = id
-        get() {
-            return field
-        }
-        set(value) {
-            require(value > 0)
-            {
-                "ID должен быть больше 0"
-            }
-            field = value
-        }
+) : Student_super(id, git) {
+
     var surname: String = surname
         get() {
             return field
@@ -62,14 +52,6 @@ class Student(
         }
         set(value) {
             checkMail(value)
-            field = value
-        }
-    var git: String? = git
-        get() {
-            return field
-        }
-        set(value) {
-            checkGit(value)
             field = value
         }
 

@@ -3,18 +3,8 @@ class Student_Short (
     surnameIN: String? = null,
     git: String? = null,
     contact: String? = null
-) {
-    var id: Int = id
-        get() {
-            return field
-        }
-        set(value) {
-            require(value > 0)
-            {
-                "ID должен быть больше 0"
-            }
-            field = value
-        }
+) : Student_super(id, git) {
+
     var surnameIn: String? = surnameIN
         get() {
             return field
@@ -22,13 +12,7 @@ class Student_Short (
         set(value) {
             field = value
         }
-    var git: String? = git
-        get() {
-            return field
-        }
-        set(value) {
-            field = value
-        }
+
     var contact: String? = contact
         get() {
             return field
