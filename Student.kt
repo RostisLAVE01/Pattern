@@ -227,6 +227,21 @@ class Student(
 
             return stud // Возвращаем список студентов
         }
+
+        fun write_to_txt(filePath: String, stud: List<Student>) {
+            try {
+                val file = File(filePath)
+                var text = ""
+
+                    for (student in stud) {
+                        text += (student.toString() + "\n")
+                    }
+                file.writeText(text)
+                println("Данные записаны в файл: $filePath")
+            } catch (e: Exception) {
+                println("Ошибка при записи в файл: ${e.message}")
+            }
+        }
     }
 
     // Метод для проверки наличия Git

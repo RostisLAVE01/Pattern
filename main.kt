@@ -92,10 +92,13 @@ fun main() {
     var st = Student_Short(stud)
     println(st)
 
-    //№7 чтение из файла
+    //№7,8 чтение из файла
     val students = Student.read_from_txt("fail.txt")
     for(stud in students)
     {
         println(stud)
     }
+
+    //№9,10 чтение из файла
+    Student.write_to_txt("write_file.txt", students)
 }

@@ -1,0 +1,1 @@
+Student(ID: 8, Surname: 'Mirnof', Name: 'Vasilii', fathername: 'Ivanovic', Phone: '+7-916-123-45-67', Telegram: 'mirno_ivanov', Email: 'kirill@example.com', GIT: 'kirill-git')
