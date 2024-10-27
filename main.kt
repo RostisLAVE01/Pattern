@@ -103,6 +103,21 @@ fun main() {
     Student.write_to_txt("write_file.txt", students)
 
 
+    //DataTable
+//    val arr   = listOf(
+//        listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
+//        listOf("Мишков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
+//    )
+//    val datTab = DataTable(arr)
+//
+//    println("Количество строк ${datTab.GetNumCol()}")
+//    println("Количество строк ${datTab.GetNumRow()}")
+//
+//    val col = 0
+//    val row = 1
+//    println("Запись на строке $row и столбце $col: ${datTab.GetElem(row,col)}")
+//    println(datTab)
+
     //№2.5 класс Data_list_student_short
     val stArr = arrayOf(st)
     val datalist = Data_list_student_short(stArr)
@@ -119,4 +134,14 @@ fun main() {
     println("\n Записи")
     val datatab = datalist2.get_data()
     println(datatab)
+
+
+    //lab 3
+
+    //№3.1
+    val stud_listTXT = Student_list_txt.read_from_txt("fail.txt")
+    for(stud_txt in stud_listTXT)
+    {
+        println(stud_txt)
+    }
 }
