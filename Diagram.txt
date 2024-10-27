@@ -1,12 +1,12 @@
 class Student{
-+Id
-+Surname
-+name
-+patronymic
-+phone
-+telegram
-+email
-+git
+id: Int
+surname: String
+name: String
+patronymic: String?
+phone: String?
+telegram: String?
+email: String?
+git: String?
 
 -validateGit(): Boolean
 -validateContact(): Boolean
@@ -14,5 +14,41 @@ class Student{
 +setContacts(String?,String?,String?):
 +toString(): String
 Student(String,String,String,String?,String?,String?,String?)
-Student(String,String,String)
+Student(String,String)
+Student(HashMap<String,Any?>)
+Student(String)
+}
+
+class Student_super{
+Id: Int
+git: String?
+}
+
+class Student_Short{
+id: Int,
+surnameIN: String?,
+git: String?,
+contact: String?
+Student_Short(Int,String)
+Student_Short(Student)
++toString(): String
+}
+
+class DataTable{
++GetNumCol
++GetNumRow
++GetElem
++toString
+}
+
+class Datalist<T>{
++select(num:Int)
++get_selected(List<Int>)
++get_names(Array<String>)
++get_data(List<Any>)
+}
+
+class Data_list_student_short{
++get_names(Array<String>)
++get_data(List<Any>)
 }
