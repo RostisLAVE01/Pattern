@@ -17,22 +17,14 @@ open class Datalist<T>(val data: Array<T>)
 
     open fun get_names(id:Int): Array<String>
     {
-        var name = data[id]!!::class.java.declaredFields.map { it.name }.toTypedArray()
-        name[0] = id.toString()
-        return name
+
+        return arrayOf()
     }
 
-    open fun get_data(): DataTable
+    open fun get_data(): MutableList<MutableList<Any>>
     {
-        var attr = mutableListOf<List<Any>>()
-        for (id in select)
-        {
-            var arg = mutableListOf<Any>(id)
-            arg.add(data[id]!!::class.java.declaredFields.map { it }.toList())
-            attr.add(arg)
 
-        }
-        return DataTable(attr)
+        return mutableListOf(mutableListOf<Any>())
     }
 
 }
