@@ -171,4 +171,24 @@ fun main() {
         println("Id: ${shortstud.id}, F.I.O: ${shortstud.surnameIn}, Git: ${shortstud.git}, Contact: ${shortstud.contact}")
     }
 
+
+    // f. Добавить объект класса Student в список (при добавлении сформировать новый ID).
+
+    // Добавляем
+    Student_list_txt.addStudent("Мирногов", "Кирилл", "Иванович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
+
+    //g. Заменить элемент списка по ID.
+    // Заменяем по ID
+    val studentToUpdateId = 1
+    Student_list_txt.repStudId(studentToUpdateId, "Малахеев", "Кирилл", "Викторович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
+
+    //h. Удалить элемент списка по ID.
+
+    // Удаление по ID
+    val studentToDeleteId = 1
+    Student_list_txt.removeStudent(studentToDeleteId)
+
+    //get_student_short_count Получить количество элементов
+    //количество студентов
+    println("Количество студентов: ${Student_list_txt.getStudentShortCount()}")
 }
