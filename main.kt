@@ -191,4 +191,24 @@ fun main() {
     //get_student_short_count Получить количество элементов
     //количество студентов
     println("Количество студентов: ${Student_list_txt.getStudentShortCount()}")
+
+
+    //JSON
+    val filePath = "D:\\4_курс\\Libraries\\FailJSON.json"
+
+    val studentsList = Students_list_JSON(filePath)
+
+    studentsList.addStudent("Иванов", "Филип", "Малевович", "+7-988-124-45-55", "ivan2001", "ivan@example.com", "ivan-git")
+
+    val count = studentsList.getStudentCount()
+    println("Количество: $count")
+
+    val student = studentsList.getStudentById(1)
+    println("Cтудент: $student")
+
+    studentsList.removeStudent(1)
+
+    val newCount = studentsList.getStudentCount()
+    println("Количество после удаления: $newCount")
+
 }
