@@ -15,16 +15,15 @@ open class Datalist<T>(val data: Array<T>)
         return select
     }
 
-    open fun get_names(id:Int): Array<String>
+    open fun get_names(id:Int): DataTable
     {
-
-        return arrayOf()
+        throw NotImplementedError(" ")
     }
 
-    open fun get_data(): MutableList<MutableList<Any>>
+    open fun get_data(): DataTable
     {
 
-        return mutableListOf(mutableListOf<Any>())
+        throw NotImplementedError(" ")
     }
 
 }

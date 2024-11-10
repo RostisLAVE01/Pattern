@@ -1,11 +1,12 @@
 class Data_list_student_short(studlist: Array<Student_Short>): Datalist<Student_Short>(studlist)
 {
-    override fun get_names(id: Int): Array<String>
+    override fun get_names(id: Int): DataTable
     {
-        return arrayOf("ID", "F.I.O", "Git", "Contact")
+        val names = arrayOf("ID", "F.I.O", "Git", "Contact")
+        return DataTable(listOf(names.asList()))
     }
 
-    override fun get_data(): MutableList<MutableList<Any>> {
+    override fun get_data(): DataTable {
         val attr = mutableListOf<MutableList<Any>>() // Список, который мы будем преобразовывать в DataTable
         var count = 1
 
@@ -15,6 +16,6 @@ class Data_list_student_short(studlist: Array<Student_Short>): Datalist<Student_
             count++
         }
 
-        return attr
+        return DataTable(attr) // Создаём и возвращаем объект DataTable
     }
 }

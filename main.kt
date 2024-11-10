@@ -129,7 +129,7 @@ fun main() {
 
     val datalist2 = Data_list_student_short(stArr)
 
-    println("Название полей: ${datalist2.get_names(0).joinToString(", ")}")
+    println("Название полей: ${datalist2.get_names(0)}")
 
     println("\n Записи")
     val datatab = datalist2.get_data()
@@ -144,4 +144,20 @@ fun main() {
     {
         println(stud_txt)
     }
+
+    val col3 = 1
+    val row3 = 1
+
+    val arr   = listOf(
+        listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
+        listOf("Мишков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
+    )
+
+    val shortlist = Student_list_txt.get_k_n_student_short_list(row3, col3, arr)
+
+    for(shortstud in shortlist.data)
+    {
+        println("Id: ${shortstud.id}, F.I.O: ${shortstud.surnameIn}, Git: ${shortstud.git}, Contact: ${shortstud.contact}")
+    }
+
 }
