@@ -104,19 +104,19 @@ fun main() {
 
 
     //DataTable
-//    val arr   = listOf(
-//        listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
-//        listOf("Мишков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
-//    )
-//    val datTab = DataTable(arr)
-//
-//    println("Количество строк ${datTab.GetNumCol()}")
-//    println("Количество строк ${datTab.GetNumRow()}")
-//
-//    val col = 0
-//    val row = 1
-//    println("Запись на строке $row и столбце $col: ${datTab.GetElem(row,col)}")
-//    println(datTab)
+    val arr   = listOf(
+        listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
+        listOf("Мишков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
+    )
+    val datTab = DataTable(arr)
+
+    println("Количество строк ${datTab.GetNumCol()}")
+    println("Количество строк ${datTab.GetNumRow()}")
+
+    val col = 0
+    val row = 1
+    println("Запись на строке $row и столбце $col: ${datTab.GetElem(row,col)}")
+    println(datTab)
 
     //№2.5 класс Data_list_student_short
     val stArr = arrayOf(st)
@@ -148,12 +148,17 @@ fun main() {
     val col3 = 1
     val row3 = 1
 
-    val arr   = listOf(
+    val arr1   = listOf(
         listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
         listOf("Мишков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
     )
 
-    val shortlist = Student_list_txt.get_k_n_student_short_list(row3, col3, arr)
+    // Преобразуем List<List<String>> в List<Student_Short>
+    val students3 = arr1.mapIndexed { index, studentData ->
+        Student_Short(index, studentData[0], studentData[1], studentData[2])
+    }
+
+    val shortlist = Student_list_txt.get_k_n_student_short_list(row3, col3, students3)
 
     for(shortstud in shortlist.data)
     {
