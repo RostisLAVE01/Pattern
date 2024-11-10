@@ -36,6 +36,9 @@ class Student_list_txt: Student(0, "", ""){
             )
         }
 
-
+        // ‘ункци€ сортировки по ‘амили€»нициалы
+        fun sortFIO(students: List<Student_Short>): List<Student_Short> {
+            return students.sortedWith(compareBy({ it.surnameIn }))
+        }
     }
 }
