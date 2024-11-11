@@ -143,8 +143,9 @@ fun main() {
     //lab 3
 
     //№3.1
-    val stud_listTXT = Student_list_txt.read_from_txt("fail.txt")
-    for(stud_txt in stud_listTXT)
+    val stud_listTXT = Student_list_txt("fail.txt")
+    val studListTxt = stud_listTXT.readFromFile()
+    for(stud_txt in studListTxt)
     {
         println(stud_txt)
     }
@@ -164,10 +165,10 @@ fun main() {
 
 
     // Сортируем студентов по Фамилия и Инициалы (e)
-    val sortedStudents = Student_list_txt.sortFIO(students3)
+    val sortedStudents = stud_listTXT.sortFIO(students3)
 
     // d.
-    val shortlist = Student_list_txt.get_k_n_student_short_list(n3, k3, sortedStudents)
+    val shortlist = stud_listTXT.get_k_n_student_short_list(n3, k3, sortedStudents)
 
 
     for(shortstud in shortlist.data)
@@ -179,22 +180,22 @@ fun main() {
     // f. Добавить объект класса Student в список (при добавлении сформировать новый ID).
 
     // Добавляем
-    Student_list_txt.addStudent("Мирногов", "Кирилл", "Иванович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
+    stud_listTXT.addStudent("Мирногов", "Кирилл", "Иванович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
 
     //g. Заменить элемент списка по ID.
     // Заменяем по ID
     val studentToUpdateId = 1
-    Student_list_txt.repStudId(studentToUpdateId, "Малахеев", "Кирилл", "Викторович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
+    stud_listTXT.repStudId(studentToUpdateId, "Малахеев", "Кирилл", "Викторович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
 
     //h. Удалить элемент списка по ID.
 
     // Удаление по ID
     val studentToDeleteId = 1
-    Student_list_txt.removeStudent(studentToDeleteId)
+    stud_listTXT.removeStudent(studentToDeleteId)
 
     //get_student_short_count Получить количество элементов
     //количество студентов
-    println("Количество студентов: ${Student_list_txt.getStudentShortCount()}")
+    println("Количество студентов: ${stud_listTXT.getStudentCount()}")
 
 
     //JSON
