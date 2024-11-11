@@ -1,3 +1,7 @@
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import java.io.File
+
 fun main() {
     val example_1 = Student(
          1,
@@ -211,4 +215,30 @@ fun main() {
     val newCount = studentsList.getStudentCount()
     println("Количество после удаления: $newCount")
 
+    //YAML
+    val studentsYAML = Students_list_YAML("D:\\4_курс\\Libraries\\FileYAML.yaml")
+
+    studentsYAML.addStudent(surname = "Крюкович", name = "Владлен", patronymic = "Киреевич", phone = "+7-988-124-45-55", telegram = "vov_tel", email = "vov@example.com", git = "github.com/vov")
+    studentsYAML.addStudent(surname = "Маминов", name = "Имануил", patronymic = "Петрович", phone = "+7-988-124-45-66", telegram = "rov_tel", email = "rov@example.com", git = "github.com/rov")
+
+//    val studentsYAML = listOf(
+//        Student(1, "Ivanov", "Ivan", "Ivanovich", "123456789", "ivanov_telegram", "ivanov@example.com", "github.com/ivanov"),
+//        Student(2, "Petrov", "Petr", "Petrovich", "987654321", "petrov_telegram", "petrov@example.com", "github.com/petrov")
+//    )
+//    val objectMapper = ObjectMapper(YAMLFactory())
+//    val yamlFile = File("D:\\4_курс\\Libraries\\FileYAML.yaml")
+//    // Сериализация данных в YAML
+//    objectMapper.writeValue(yamlFile, studentsYAML)
+//
+//    println("Файл students.yaml успешно создан.")
+
+
+    val studYAML = studentsYAML.getStudentById(1)
+    println("Студент с ID 1: $studYAML")
+
+    studentsYAML.repStudId(1, surname = "Ivanov", name = "Ivan", patronymic = "Ivanovich", phone = "111222333", telegram = "ivanov_updated", email = "ivanov_new@example.com", git = "github.com/ivanov_updated")
+
+    studentsYAML.removeStudent(2)
+
+    println("Количество студентов после удаления: ${studentsYAML.getStudentCount()}")
 }
