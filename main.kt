@@ -1,10 +1,6 @@
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import java.io.File
-
 fun main() {
     val example_1 = Student(
-         1,
+        1,
         "Фолгимштейн",
         "Федор",
         "Крузинштейн",
@@ -142,104 +138,52 @@ fun main() {
 
     //lab 3
 
-    //№3.1
-    val stud_listTXT = Student_list_txt("fail.txt")
-    val studListTxt = stud_listTXT.readFromFile()
-    for(stud_txt in studListTxt)
-    {
-        println(stud_txt)
-    }
-
-    val k3 = 2
-    val n3 = 0
-
-    val arr1   = listOf(
-        listOf("Мирногов Кирилл Иванович", "kirill-git", "+7-916-123-45-67"),
-        listOf("Аиков Иван Витальевич", "Iva-git", "+7-977-111-45-56")
-    )
-
-    // Преобразуем List<List<String>> в List<Student_Short>
-    val students3 = arr1.mapIndexed { index, studentData ->
-        Student_Short(index, studentData[0], studentData[1], studentData[2])
-    }
-
-
-    // Сортируем студентов по Фамилия и Инициалы (e)
-    val sortedStudents = stud_listTXT.sortFIO(students3)
-
-    // d.
-    val shortlist = stud_listTXT.get_k_n_student_short_list(n3, k3, sortedStudents)
-
-
-    for(shortstud in shortlist.data)
-    {
-        println("Id: ${shortstud.id}, F.I.O: ${shortstud.surnameIn}, Git: ${shortstud.git}, Contact: ${shortstud.contact}")
-    }
-
-
-    // f. Добавить объект класса Student в список (при добавлении сформировать новый ID).
-
-    // Добавляем
-    stud_listTXT.addStudent("Мирногов", "Кирилл", "Иванович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
-
-    //g. Заменить элемент списка по ID.
-    // Заменяем по ID
-    val studentToUpdateId = 1
-    stud_listTXT.repStudId(studentToUpdateId, "Малахеев", "Кирилл", "Викторович", "+7-916-123-45-67", "mirno_ivanov", "kirill@example.com", "kirill-git")
-
-    //h. Удалить элемент списка по ID.
-
-    // Удаление по ID
-    val studentToDeleteId = 1
-    stud_listTXT.removeStudent(studentToDeleteId)
-
-    //get_student_short_count Получить количество элементов
-    //количество студентов
-    println("Количество студентов: ${stud_listTXT.getStudentCount()}")
-
+//    //№3.1
+//    val stud_listTXT = Student_list_txt.read_from_txt("fail.txt")
+//    for(stud_txt in stud_listTXT)
+//    {
+//        println(stud_txt)
+//    }
 
     //JSON
-    val filePath = "D:\\4_курс\\Libraries\\FailJSON.json"
 
-    val studentsList = Students_list_JSON(filePath)
+    val studentManager = Student_Manager(strategy = Students_list_JSON())
 
-    studentsList.addStudent("Иванов", "Филип", "Малевович", "+7-988-124-45-55", "ivan2001", "ivan@example.com", "ivan-git")
+    //путь к файлу
+    val fileJson = "students.json"
 
-    val count = studentsList.getStudentCount()
-    println("Количество: $count")
+    studentManager.addStudent("Иванов", "Иван", null, "123456789", null, "ivan@example.com", "https://github.com/ivan")
+    studentManager.addStudent("Петров", "Петр", "Сидорович", "987654321", "@petrov", "petr@example.com", null)
 
-    val student = studentsList.getStudentById(1)
-    println("Cтудент: $student")
+    println("Количество студентов: ${studentManager.getStudentCount()}")
 
-    studentsList.removeStudent(1)
+    println("Студент под ID: ${studentManager.getStudentById(2)}")
 
-    val newCount = studentsList.getStudentCount()
-    println("Количество после удаления: $newCount")
+    // Запись в файл
+    studentManager.writeToFile(fileJson)
 
-    //YAML
-    val studentsYAML = Students_list_YAML("D:\\4_курс\\Libraries\\FileYAML.yaml")
+    // Yaml
+    val studentManageryaml = Student_Manager(strategy = Students_list_YAML())
 
-    studentsYAML.addStudent(surname = "Крюкович", name = "Владлен", patronymic = "Киреевич", phone = "+7-988-124-45-55", telegram = "vov_tel", email = "vov@example.com", git = "github.com/vov")
-    studentsYAML.addStudent(surname = "Маминов", name = "Имануил", patronymic = "Петрович", phone = "+7-988-124-45-66", telegram = "rov_tel", email = "rov@example.com", git = "github.com/rov")
+    //путь к файлу
+    val fileYaml = "write_file.yaml"
 
-//    val studentsYAML = listOf(
-//        Student(1, "Ivanov", "Ivan", "Ivanovich", "123456789", "ivanov_telegram", "ivanov@example.com", "github.com/ivanov"),
-//        Student(2, "Petrov", "Petr", "Petrovich", "987654321", "petrov_telegram", "petrov@example.com", "github.com/petrov")
-//    )
-//    val objectMapper = ObjectMapper(YAMLFactory())
-//    val yamlFile = File("D:\\4_курс\\Libraries\\FileYAML.yaml")
-//    // Сериализация данных в YAML
-//    objectMapper.writeValue(yamlFile, studentsYAML)
-//
-//    println("Файл students.yaml успешно создан.")
+    studentManageryaml.addStudent("Иванов", "Иван", null, "123456789", null, "ivan@example.com", "https://github.com/ivan")
+    studentManageryaml.addStudent("Петров", "Петр", "Сидорович", "987654321", "@petrov", "petr@example.com", null)
 
+    // Запись в файл
+    studentManageryaml.writeToFile(fileYaml)
 
-    val studYAML = studentsYAML.getStudentById(1)
-    println("Студент с ID 1: $studYAML")
+    // Txt
+    val studentManagerTxt = Student_Manager(strategy = Student_list_txt())
 
-    studentsYAML.repStudId(1, surname = "Ivanov", name = "Ivan", patronymic = "Ivanovich", phone = "111222333", telegram = "ivanov_updated", email = "ivanov_new@example.com", git = "github.com/ivanov_updated")
+    //путь к файлу
+    val fileTxt = "write_file.txt"
 
-    studentsYAML.removeStudent(2)
+    studentManagerTxt.addStudent("Иванов", "Иван", null, "123456789", null, "ivan@example.com", "https://github.com/ivan")
+    studentManagerTxt.addStudent("Петров", "Петр", "Сидорович", "987654321", "@petrov", "petr@example.com", null)
 
-    println("Количество студентов после удаления: ${studentsYAML.getStudentCount()}")
+    // Запись в файл
+    studentManagerTxt.writeToFile(fileTxt)
+
 }

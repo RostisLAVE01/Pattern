@@ -1,34 +1,36 @@
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import org.yaml.snakeyaml.Yaml
 import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 
-class Students_list_YAML(filePath: String) : Students_list_super(filePath) {
+class Students_list_YAML : Students_list_super(), StudentStrategy {
 
-    init {
-        objectMapper = ObjectMapper(YAMLFactory())
-        students.addAll(readFromFile())
-    }
+    private val yaml = Yaml()
 
-    override fun readFromFile(): MutableList<Student> {
-        return try {
-            val file = File(filePath)
+    override fun readFromFile(path: String) {
+        try {
+            val file = File(path)
             if (file.exists()) {
-                objectMapper.readValue(
-                    file,
-                    objectMapper.typeFactory.constructCollectionType(MutableList::class.java, Student::class.java)
-                )
+                FileReader(file).use { reader ->
+                    val loadedStudents: List<Student>? = yaml.load(reader)
+                    students.clear()
+                    students.addAll(loadedStudents ?: mutableListOf())
+                }
             } else {
-                mutableListOf()
+                students.clear()
             }
         } catch (e: Exception) {
             println("Ошибка при чтении файла: ${e.message}")
-            mutableListOf()
         }
     }
 
-    override fun writeToFile() {
+    override fun writeToFile(path: String) {
         try {
-            objectMapper.writeValue(File(filePath), students)
+            println("Записываем в файл: ${students}")
+            FileWriter(File(path)).use { writer ->
+                yaml.dump(students, writer)
+            }
+            println("Данные успешно записаны в файл: $path")
         } catch (e: Exception) {
             println("Ошибка при записи в файл: ${e.message}")
         }

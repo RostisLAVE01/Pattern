@@ -3,15 +3,12 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import java.io.File
 
 // Суперкласс
-open class Students_list_super(protected val filePath: String) { // Изменено на protected
-    protected val students: MutableList<Student> = mutableListOf()
-    protected lateinit var objectMapper: ObjectMapper
+open class Students_list_super {
 
-    open fun readFromFile(): MutableList<Student> {
-        return mutableListOf()
-    }
+    // Список студентов
+    var students = mutableListOf<Student>()
 
-    open fun writeToFile() {}
+    //open fun writeToFile(){}
 
     // Добавление нового метода для получения короткого списка студентов
     fun get_k_n_student_short_list(n: Int, k: Int, students: List<Student_Short>): Data_list_student_short {
@@ -29,7 +26,7 @@ open class Students_list_super(protected val filePath: String) { // Изменено на 
         val newId = if (students.isEmpty()) 1 else students.last().id + 1
         val newStudent = Student(newId, surname, name, patronymic, phone, telegram, email, git)
         students.add(newStudent)
-        writeToFile()
+        //writeToFile()
         println("Добавлен: $newStudent")
     }
 
@@ -38,7 +35,7 @@ open class Students_list_super(protected val filePath: String) { // Изменено на 
         val index = students.indexOfFirst { it.id == id }
         return if (index != -1) {
             students[index] = Student(id, surname, name, patronymic, phone, telegram, email, git)
-            writeToFile()
+            //writeToFile()
             println("Студент с ID $id был обновлён.")
             true
         } else {
@@ -51,7 +48,7 @@ open class Students_list_super(protected val filePath: String) { // Изменено на 
         val index = students.indexOfFirst { it.id == id }
         return if (index != -1) {
             students.removeAt(index)
-            writeToFile()
+            //writeToFile()
             println("Студент с ID $id был удалён.")
             true
         } else {

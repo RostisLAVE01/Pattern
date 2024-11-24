@@ -1,35 +1,34 @@
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
 import java.lang.reflect.Type
-class Students_list_JSON(filePath: String): Students_list_super(filePath) {
+class Students_list_JSON: Students_list_super(),StudentStrategy {
 
-    init {
-        objectMapper = ObjectMapper()
-        students.addAll(readFromFile())
-    }
+    private val gson = Gson()
 
-    override fun readFromFile(): MutableList<Student> {
-        return try {
-            val file = File(filePath)
-            if (file.exists()) {
-                objectMapper.readValue(
-                    file,
-                    objectMapper.typeFactory.constructCollectionType(MutableList::class.java, Student::class.java)
-                )
-            } else {
-                mutableListOf()
-            }
+    override fun readFromFile(path: String) {
+        try {
+            val file = File(path)
+            val type: Type = object : TypeToken<List<Student>>() {}.type
+            val loadedStudents: List<Student> = gson.fromJson(file.reader(), type)
+            students.clear()
+            students.addAll(loadedStudents)
         } catch (e: Exception) {
             println("Ошибка при чтении файла: ${e.message}")
-            mutableListOf()
         }
     }
 
-    override fun writeToFile() {
+    override fun writeToFile(path: String) {
         try {
-            objectMapper.writeValue(File(filePath), students)
+            println("Записываем в файл: ${students}")
+            val file = File(path)
+            // Запись в файл
+            file.writer().use { writer ->
+                gson.toJson(students, writer)
+            }
+            println("Данные успешно записаны в файл: $path")
         } catch (e: Exception) {
             println("Ошибка при записи в файл: ${e.message}")
         }
