@@ -191,17 +191,17 @@ fun main() {
 
     // номер 5 выполнение select
 
-//    val dbManager = DatabaseSelect()
-//    val students4 = dbManager.getAllStudents()
-//
-//    for (student in students4) {
-//        println("ID: ${student.id}, FIO: ${student.surname} ${student.name} ${student.patronymic}, " +
-//                "Phone: ${student.phone}, Telegram: ${student.telegram}, Email: ${student.email}, Git: ${student.git}")
-//    }
+    val dbManager = DatabaseSelect()
+    val students4 = dbManager.getAllStudents()
+
+    for (student in students4) {
+        println("ID: ${student.id}, FIO: ${student.surname} ${student.name} ${student.patronymic}, " +
+                "Phone: ${student.phone}, Telegram: ${student.telegram}, Email: ${student.email}, Git: ${student.git}")
+    }
 
     val studentDb = Students_list_DB()
 
-    val studentId = 1 // Замените на нужный ID
+    val studentId = 1
     val student = studentDb.getStudentById(studentId)
 
     if (student != null) {
@@ -210,5 +210,50 @@ fun main() {
     } else {
         println("Студент с ID $studentId не найден.")
     }
+
+
+    // c Добавить
+    val studentAdd = Student(0, "Филион", "Иван", "Максимович", "+7-977-111-45-56", "@ivanov", "ivan@mail.com", "Iva-git")
+    val db = Students_list_DB()
+
+    if (db.addStudent(studentAdd)) {
+        println("Студент был добавлен.")
+    } else {
+        println("Произошла ошибка при добавлении студента.")
+    }
+
+    // Получить список k по счету n
+    val k = 3 // Индекс, с которого нужно начать
+    val n = 2 // Количество студентов, которое нужно получить
+    val studentget = Students_list_DB()
+
+    val studentsNK = studentget.get_k_n_student_short_list(k, n)
+
+    for (student in studentsNK) {
+        println("ID: ${student.id}, FIO: ${student.surnameIn}, " +
+                "Phone: ${student.contact} Git: ${student.git}")
+    }
+
+
+    //d. Заменить элемент
+    val upStudent = Student(15, "Филион", "Фредрех", "Максимович", "+7-977-111-45-56", "@ivanov", "ivan@mail.com", "Iva-git")
+    val Update = studentDb.updateStudent(upStudent)
+
+    if (Update) {
+        println("Студент обновлен.")
+    } else {
+        println("Ошибка при обновлении студента.")
+    }
+
+    //e. Удалить элемент
+    val Delete = studentDb.deleteStudent(15)
+
+    if (Delete) {
+        println("Студент удалён.")
+    } else {
+        println("Ошибка при удалении.")
+    }
+
+    println("Количество студентов " + studentDb.getStudentCount())
 
 }
