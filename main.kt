@@ -186,4 +186,17 @@ fun main() {
     // Запись в файл
     studentManagerTxt.writeToFile(fileTxt)
 
+
+    // lab 4
+
+    // номер 5 выполнение select
+
+    val dbManager = DatabaseSelect()
+    val students4 = dbManager.getAllStudents()
+
+    for (student in students4) {
+        println("ID: ${student.id}, FIO: ${student.surname} ${student.name} ${student.patronymic}, " +
+                "Phone: ${student.phone}, Telegram: ${student.telegram}, Email: ${student.email}, Git: ${student.git}")
+    }
+
 }
