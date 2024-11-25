@@ -191,12 +191,24 @@ fun main() {
 
     // номер 5 выполнение select
 
-    val dbManager = DatabaseSelect()
-    val students4 = dbManager.getAllStudents()
+//    val dbManager = DatabaseSelect()
+//    val students4 = dbManager.getAllStudents()
+//
+//    for (student in students4) {
+//        println("ID: ${student.id}, FIO: ${student.surname} ${student.name} ${student.patronymic}, " +
+//                "Phone: ${student.phone}, Telegram: ${student.telegram}, Email: ${student.email}, Git: ${student.git}")
+//    }
 
-    for (student in students4) {
+    val studentDb = Students_list_DB()
+
+    val studentId = 1 // Замените на нужный ID
+    val student = studentDb.getStudentById(studentId)
+
+    if (student != null) {
         println("ID: ${student.id}, FIO: ${student.surname} ${student.name} ${student.patronymic}, " +
                 "Phone: ${student.phone}, Telegram: ${student.telegram}, Email: ${student.email}, Git: ${student.git}")
+    } else {
+        println("Студент с ID $studentId не найден.")
     }
 
 }
