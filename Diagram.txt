@@ -52,3 +52,46 @@ class Data_list_student_short{
 +get_names(Array<String>)
 +get_data(List<Any>)
 }
+
+class Student_Manager {
+  + writeToFile(String)
+  + readFromFile(String)
+   strategy: StudentListStrategy
+}
+class Students_list_JSON {
+  + writeToFile(String)
+  + readFromFile(String)
+}
+interface StudentStrategy << interface >> {
+  + writeToFile(String)
+  + readFromFile(String)
+   students:MutableList<Student>
+}
+class Students_list_super {
+  + get_k_n_student_short_list(Int, Int,List<Student_Short>)
+  + sortFIO(List<Student_Short>):
+  + addStudent( String, String, String?, String?, String?,String?, String?)
+  + repStudId(Int, String, String, String?, String?, String?,String?, String?)
+  + removeStudent(Int)
+  + getStudentCount(): Int
+  + getStudentById(Int): Student?
+}
+class Student_list_txt {
+  + writeToFile(String)
+  + readFromFile(String)
+}
+class Students_list_YAML {
+  + readFromFile(String)
+  + writeToFile(String)
+}
+
+class Students_list_DB {
+  + getStudentById(Int)
+  + get_k_n_student_short_list(k: Int, n: Int): MutableList<Student_Short>
+  + addStudent(Student)
+  + updateStudent(Student)
+  + deleteStudent(Int):
+  + getStudentCount(): Int
+  + addStudent(Student): Unit
+  + deleteStudent(Int): Unit
+}
