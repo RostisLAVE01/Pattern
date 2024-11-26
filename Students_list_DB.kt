@@ -1,12 +1,22 @@
-import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.PreparedStatement
-import java.sql.ResultSet
 
-class Students_list_DB {
+
+class Students_list_DB private constructor() {
     private val url = "jdbc:postgresql://localhost:5432/Students"
     private val user = "postgres"
     private val password = "1"
+
+    companion object {
+        @Volatile
+        private var INSTANCE: Students_list_DB? = null
+
+        fun getInstance(): Students_list_DB {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: Students_list_DB().also { INSTANCE = it }
+            }
+        }
+    }
+
 
     fun getStudentById(id: Int): Student? {
         var student: Student? = null
