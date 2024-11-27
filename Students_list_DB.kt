@@ -7,13 +7,10 @@ class Students_list_DB private constructor() {
     private val password = "1"
 
     companion object {
-        @Volatile
-        private var INSTANCE: Students_list_DB? = null
+        private val instance: Students_list_DB = Students_list_DB()
 
         fun getInstance(): Students_list_DB {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Students_list_DB().also { INSTANCE = it }
-            }
+            return instance
         }
     }
 
@@ -120,7 +117,7 @@ class Students_list_DB private constructor() {
             pstmt.setString(5, student.telegram)
             pstmt.setString(6, student.email)
             pstmt.setString(7, student.git)
-            pstmt.setInt(8, student.id) // Установка ID для поиска
+            pstmt.setInt(8, student.id)
 
             pstmt.executeUpdate() > 0 // Возвращает true, если строки были обновлены
         } catch (e: Exception) {
