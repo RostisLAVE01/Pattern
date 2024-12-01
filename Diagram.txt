@@ -92,6 +92,15 @@ class Students_list_DB {
   + updateStudent(Student)
   + deleteStudent(Int):
   + getStudentCount(): Int
-  + addStudent(Student): Unit
-  + deleteStudent(Int): Unit
+  + addStudent(Student): Init
+  + deleteStudent(Int): Init
+}
+
+class StudentList {
+  + getStudentById(id: Int): Student?
+  + get_k_n_student_short_list(k: Int, n: Int): MutableList<Student_Short>
+  + addStudent(student: Student): Boolean
+  + updateStudent(student: Student): Boolean
+  + deleteStudent(studentId: Int): Boolean
+    getStudentCount(): Int
 }

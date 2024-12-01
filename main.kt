@@ -254,4 +254,47 @@ fun main() {
 
     println("Количество студентов " + studentDb.getStudentCount())
 
+
+
+    println("№5")
+
+
+    // Инициализация StudentList с путем к файлу в формате JSON
+    val studentList: StudentListInterface = StudentList("students.json")
+
+    // Добавляем студентов
+    studentList.addStudent(Student(1, "Иванов", "Иван", "Иванович", "123456789", "ivanov_ivan", "ivanov@gmail.com", "ivanov_git"))
+    studentList.addStudent(Student(2, "Петров", "Пётр", "Петрович", "987654321", "petrov_petr", "petrov@gmail.com", "petrov_git"))
+
+    // Получаем количество студентов
+    println("Количество студентов: ${studentList.getStudentCount()}")
+
+    // Получаем студента по ID
+    val studentById = studentList.getStudentById(1)
+    println("Студент с ID 1: $studentById")
+
+    // Получаем краткий список студентов (например, первые 2 студента, начиная с индекса 0)
+    val shortList = studentList.get_k_n_student_short_list(2, 0)
+    println("Краткая информация о студентах:")
+    for (student in shortList) {
+        println("ID: ${student.id}, ФИО: ${student.surnameIn}, Контакт: ${student.contact}, Git: ${student.git}")
+    }
+
+    // Обновляем информацию о студенте
+    val updatedStudent = Student(1, "Иванов", "Иван", "Иванович", "9876543210", "ivanov_ivan_updated", "ivanov_updated@gmail.com", "ivanov_git_updated")
+    if (studentList.updateStudent(updatedStudent)) {
+        println("Информация о студенте с ID 1 была обновлена.")
+    } else {
+        println("Не удалось обновить информацию о студенте с ID 1.")
+    }
+
+//    // Удаляем студента по ID
+//    if (studentList.deleteStudent(2)) {
+//        println("Студент с ID 2 был удален.")
+//    } else {
+//        println("Не удалось удалить студента с ID 2.")
+//    }
+//
+//    // Проверяем количество студентов после удаления
+//    println("Количество студентов после удаления: ${studentList.getStudentCount()}")
 }
