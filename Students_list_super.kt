@@ -10,11 +10,26 @@ open class Students_list_super {
 
     //open fun writeToFile(){}
 
-    // ƒобавление нового метода дл€ получени€ короткого списка студентов
-    fun get_k_n_student_short_list(n: Int, k: Int, students: List<Student_Short>): Data_list_student_short {
+    // ћетод дл€ получени€ короткого списка студентов
+    fun get_k_n_student_short_list(n: Int, k: Int): MutableList<Student_Short> {
         require(n >= 0) { "»ндекс n должен быть больше или равен 0." }
         require(k > 0) { " оличество k должно быть больше 0." }
-        return Data_list_student_short(students.drop(n).take(k).toTypedArray())
+
+        // ѕреобразование студентов в Student_Short
+        val shortList = students.drop(n).take(k).map { student ->
+
+            val contact = listOfNotNull(student.phone, student.telegram, student.email).joinToString(", ")
+            val surnameIN = listOfNotNull(student.surname, student.name, student.patronymic).joinToString(", ")
+
+            Student_Short(
+                id = student.id,
+                surnameIN = surnameIN,
+                git = student.git,
+                contact = contact
+            )
+        }
+
+        return shortList.toMutableList()
     }
 
     fun sortFIO(students: List<Student_Short>): List<Student_Short> {
