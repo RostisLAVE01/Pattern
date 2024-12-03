@@ -1,3 +1,5 @@
+import javax.swing.SwingUtilities
+
 fun main() {
     val example_1 = Student(
         1,
@@ -297,4 +299,13 @@ fun main() {
 //
 //    // Проверяем количество студентов после удаления
 //    println("Количество студентов после удаления: ${studentList.getStudentCount()}")
+
+
+    val studentsList = Students_list_super()
+    // Добавьте нескольких студентов для тестирования
+    studentsList.addStudent("Иванов", "Иван", null, "1234567890", "ivanov", "ivan@example.com", "https://github.com/ivanov")
+    studentsList.addStudent("Петров", "Петр", null, "0987654321", "petrov", "petrov@example.com", "https://github.com/petrov")
+
+    // Запуск приложения
+    SwingUtilities.invokeLater { Student_list_view(studentsList) }
 }
