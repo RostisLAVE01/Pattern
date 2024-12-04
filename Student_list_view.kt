@@ -6,16 +6,26 @@ import javax.swing.JPanel;
 import javax.swing.*
 import javax.swing.table.DefaultTableModel
 import java.awt.*
+import javax.swing.table.TableRowSorter
 
 class Student_list_view(private val studentsList: Students_list_super) {
 
     private val frame = JFrame("Student List View")
     private val tabbedPane = JTabbedPane()
-    private val tableModel = DefaultTableModel(arrayOf("ID", "ФИО", "Git", "Контакт"), 0)
+    private val tableModel = NonEditableTableModel(arrayOf("ID", "ФИО", "Git", "Контакт"))
     private val table = JTable(tableModel)
 
-    private val tableModelAllStudents = DefaultTableModel(arrayOf("ID", "ФИО", "Git", "Контакт"), 0)
+    private val tableModelAllStudents = NonEditableTableModel(arrayOf("ID", "ФИО", "Git", "Контакт"))
     private val tableAllStudents = JTable(tableModelAllStudents)
+
+    // Добавляем TableRowSorter для сортировки
+    private val sorter = TableRowSorter(tableModel)
+    private val sorterAll = TableRowSorter(tableModelAllStudents)
+
+    // Пагинация
+    private var currentPage = 1
+    private val pageSize = 20
+    private val totalPages get() = (studentsList.students.size + pageSize - 1) / pageSize
 
     init {
         createAndShowGUI()
@@ -24,6 +34,11 @@ class Student_list_view(private val studentsList: Students_list_super) {
     private fun createAndShowGUI() {
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         frame.setSize(800, 600)
+
+        // Устанавливаем TableRowSorter для таблиц
+        table.rowSorter = sorter
+        tableAllStudents.rowSorter = sorterAll
+
 
         // Первое окно - Отображение всех студентов
         val allStudentsPanel = createAllStudentsTab()
@@ -103,7 +118,6 @@ class Student_list_view(private val studentsList: Students_list_super) {
 
         panel.add(filterPanel, BorderLayout.NORTH)
 
-        // Таблица
         panel.add(JScrollPane(table), BorderLayout.CENTER)
 
         // Кнопки
@@ -132,6 +146,34 @@ class Student_list_view(private val studentsList: Students_list_super) {
         controlPanel.add(removeButton)
         panel.add(controlPanel, BorderLayout.SOUTH)
 
+        // Пагинация
+        val paginationPanel = JPanel()
+        val previousButton = JButton("Предыдущая")
+        val nextButton = JButton("Следующая")
+        val pageLabel = JLabel("Страница $currentPage из $totalPages")
+
+        previousButton.addActionListener {
+            if (currentPage > 1) {
+                currentPage--
+                refreshTable()
+                pageLabel.text = "Страница $currentPage из $totalPages"
+            }
+        }
+
+        nextButton.addActionListener {
+            if (currentPage < totalPages) {
+                currentPage++
+                refreshTable()
+                pageLabel.text = "Страница $currentPage из $totalPages"
+            }
+        }
+
+        paginationPanel.add(previousButton)
+        paginationPanel.add(nextButton)
+        paginationPanel.add(pageLabel)
+
+        panel.add(paginationPanel, BorderLayout.PAGE_END)
+
         return panel
     }
 
@@ -152,5 +194,11 @@ class Student_list_view(private val studentsList: Students_list_super) {
             val surnameIN = listOfNotNull(student.surname, student.name, student.patronymic).joinToString(", ")
             tableModelAllStudents.addRow(arrayOf(student.id, surnameIN, student.git, contact))
         }
+    }
+}
+
+class NonEditableTableModel(columnNames: Array<String>) : DefaultTableModel(columnNames, 0) {
+    override fun isCellEditable(row: Int, column: Int): Boolean {
+        return false // Запрет на редактирование всех ячеек
     }
 }
