@@ -1,5 +1,5 @@
 import javax.swing.SwingUtilities
-
+import View
 fun main() {
     val example_1 = Student(
         1,
@@ -308,5 +308,6 @@ fun main() {
     studentsList.addStudent("Иванов", "Иван", null, "1234567890", "ivanov", "ivan@example.com", "https://github.com/ivanov")
     studentsList.addStudent("Петров", "Петр", null, "0987654321", "petrov", "petrov@example.com", "https://github.com/petrov")
 
-    SwingUtilities.invokeLater { Student_list_view(studentsList) }
+    val view = View(studentsList)
+    Student_list_controller(view, studentsList)
 }
